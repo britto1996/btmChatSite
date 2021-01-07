@@ -18,6 +18,12 @@
     min-width: 10vw;
 }
 
+.sidebar-header-right>.MultiSvgIcon-root {
+    margin-right: 2vw;
+    font-size: 24px !important;
+}
+
+
 .sidebar-search{
     display: flex;
     align-items: center;
@@ -34,6 +40,7 @@
     height: 35px;
     border-radius: 20px;
 }
+
 
 .sidebar-search-container > input{
     border: none;
