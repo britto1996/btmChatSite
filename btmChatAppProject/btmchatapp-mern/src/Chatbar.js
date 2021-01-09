@@ -3,7 +3,9 @@ import React from 'react'
 import { Avatar , IconButton } from "@material-ui/core"
 import SearchIcon from '@material-ui/icons/Search'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
+import MicIcon from '@material-ui/icons/Mic';
 function Chatbar() {
     return (
         <div className="chatbar">
@@ -39,7 +41,7 @@ function Chatbar() {
                 </span>
                 </p>
 
-                 <p className="chatreciever">
+                 <p className="chatmessage chatreciever">
                 <span className="chatname">
                     btm
                 </span>This is a message
@@ -56,8 +58,17 @@ function Chatbar() {
                     {new Date().toUTCString()}
                 </span>
                 </p>
+                
             </div>
+            <div className="chatfooter">
+                <InsertEmoticonIcon/>
+                <form>
+                <input type="text" placeholder="type a message" />
+                <button type="submit">send a message</button>
+                </form>
 
+                <MicIcon/>
+            </div>
             
         </div>
     )
