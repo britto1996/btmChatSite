@@ -1,12 +1,28 @@
 import './Chatbar.css'
 import React from 'react'
+import { useState } from 'react';
 import { Avatar , IconButton } from "@material-ui/core"
 import SearchIcon from '@material-ui/icons/Search'
 import AttachFileIcon from '@material-ui/icons/AttachFile'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import MicIcon from '@material-ui/icons/Mic';
-function Chatbar() {
+import axios from './axios';
+function Chatbar({messages}) {
+
+    const [input , setInput] = useState("")
+
+    const sendMessage = async (e) => {
+        e.preventDefault()
+
+        await axios.post("/api/messages",{
+            message:input,
+            name:"DEMO",
+            timestamp:"Just Now",
+            recieved:false
+        })
+
+    }
     return (
         <div className="chatbar">
             <div className="chatbarHeader">
@@ -32,39 +48,29 @@ function Chatbar() {
             
             </div>
             <div className="chatbody">
-                <p className="chatmessage">
+            {
+                messages.map((messages)=>(
+                    <p className = {`chatmessage ${messages.recieved && "chatreciever"}`}>
                 <span className="chatname">
-                    btm
-                </span>This is a message
+                    {messages.name}
+                </span>{messages.message}
                 <span className="chattime">
-                    {new Date().toUTCString()}
+                    {messages.timestamp}
                 </span>
                 </p>
+                ))
+            }
+                
 
-                 <p className="chatmessage chatreciever">
-                <span className="chatname">
-                    btm
-                </span>This is a message
-                <span className="chattime">
-                    {new Date().toUTCString()}
-                </span>
-                </p>
-
-                 <p className="chatmessage">
-                <span className="chatname">
-                    btm
-                </span>This is a message
-                <span className="chattime">
-                    {new Date().toUTCString()}
-                </span>
-                </p>
+                 
+                
                 
             </div>
             <div className="chatfooter">
                 <InsertEmoticonIcon/>
                 <form>
-                <input type="text" placeholder="type a message" />
-                <button type="submit">send a message</button>
+                <input value={input} onChange={(e)=>setInput(e.target.value)} type="text" placeholder="type a message" />
+                <button onClick={sendMessage} type="submit">send a message</button>
                 </form>
 
                 <MicIcon/>
